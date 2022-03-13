@@ -4,12 +4,11 @@ This is my first C project. I choose this one because of its simplest project id
 
 This project must be organized according to this structure:
 
-    * Login Module
-    * Create new account
-    * Update Exist account
-    * Transactions Module
-    * Check Existing account details
-    * Delete Account
-    * View Customer List
-
+    - Login Module
+    - Create new account
+    - Update Exist account
+    - Transactions Module
+    - Check Existing account details
+    - Delete Account
+    - View Customer List
 
