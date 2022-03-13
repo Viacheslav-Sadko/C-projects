@@ -12,3 +12,4 @@ This project must be organized according to this structure:
     - Delete Account
     - View Customer List
 
+Getting started: 14.03.2022
