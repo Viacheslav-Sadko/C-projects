@@ -3,6 +3,7 @@
 #include "stdlib.h"
 #include "string.h"
 #include "unistd.h"
+
 void registration(){
     int c=1;
     FILE * ptr;
@@ -57,40 +58,34 @@ int see(){
     }
 }
 
-void replace(){
-    FILE *ptr, *new_ptr;
-    char buffer[255];
-    int c=0, t=1;
-    ptr=fopen("./info/record.dat", "r");
-    new_ptr=fopen("./info/new_record.dat", "a+");
-    while(fgets(buffer, 255, ptr)!=NULL){
-        c++;
-            if(c==t){
-                continue;
-            }
-            //fprintf(ptr, "%i) %s %s %i %i\n",add.ac_number, add.first_name, add.last_name, add.age, add.cart_number);
-            new_ac.ac_number=c;
-            rewind(ptr);
-            fscanf(buffer,"%i %s %s %i %i",&new_ac.ac_number, new_ac.first_name, new_ac.last_name, &new_ac.age, &new_ac.cart_number);
+void delete_ac()
+{
+    FILE *old,*newrec;
+    int test=0;
+    old=fopen("./info/record.dat", "r");
+    newrec=fopen("./info/new.dat","a+");
+    printf("Enter the account no. of the customer you want to delete:");
+    scanf("%d",&new_ac.ac_number);
+    while (fscanf(old,"%d) %s %s %d %d",&add.ac_number, add.first_name, add.last_name, &add.age, &add.cart_number)!=EOF)
+   {
+        if(add.ac_number!=new_ac.ac_number)
+            fprintf(newrec,"%d) %s %s %d %d\n",add.ac_number, add.first_name, add.last_name, add.age, add.cart_number);
 
-            fprintf(new_ptr, "%i) %s %s %i %i\n",c, new_ac.first_name, new_ac.last_name, new_ac.age, new_ac.cart_number);
-            
-        }
-    
-    // for(int i=0;i<=c;i++){
-    //     if(t!=c){
-    //         fgets(buffer, 255, ptr);
-    //         printf("%s", buffer);
-    //     }
-    // }
-    fclose(ptr);
-    fclose(new_ptr);
+        else
+            {test++;
+            printf("\nRecord deleted successfully!\n");
+            }
+   }
+   fclose(old);
+   fclose(newrec);
+   remove("./info/record.dat");
+   rename("./info/new.dat","./info/record.dat");
 }
 
 int menu(){
     int n=0;
     printf("Hello, welcome to the Bank management system\nSelect your menu\n");
-    printf("Menu:\n1) New client registration\n2) See all members\n4) Exit\n");
+    printf("Menu:\n1) New client registration\n2) See all members\n3) Delete account\n4) Exit\n");
     while(n!=4){
         scanf("%d", &n);
         switch(n){
@@ -100,7 +95,7 @@ int menu(){
             case 2:
             see();
             case 3:
-            replace();
+            delete_ac();
             break;
             case 4:
             break;
@@ -109,7 +104,8 @@ int menu(){
             break;
         }
         if(n!=4)
-        printf("Menu:\n1) New client registration\n2) See all members\n4) Exit\n");
+        printf("Menu:\n1) New client registration\n2) See all members\n3) Delete account\n4) Exit\n");
     }   
+    return 0;
 }
 

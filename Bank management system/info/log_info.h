@@ -1,2 +1,2 @@
-char login[]="Viacheslav";
-char password[]="123";
+char login[]="login";
+char password[]="passwor";
